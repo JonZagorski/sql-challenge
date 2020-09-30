@@ -23,7 +23,7 @@ dept_managers
 -
 dept_no VARCHAR FK >- departments.dept_no
 emp_no VARCHAR FK >- employees.emp_no
-from_date DATE 
+
 
 
 salaries
