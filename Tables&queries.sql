@@ -83,11 +83,28 @@ from employees
 
 --3. List the manager of each department with the following information:
 --department number, department name, the manager's employee number, last name, first name.
-
+SELECT dept_managers.dept_no, 
+	   Departments.dept_name,
+	   dept_managers.emp_no,
+	   Employees.last_name,
+	   Employees.first_name
+FROM dept_managers
+INNER JOIN Departments ON
+dept_managers.dept_no = Departments.dept_no
+INNER JOIN Employees ON
+dept_managers.emp_no = Employees.emp_no;
 
 --4. List the department of each employee with the following information:
 --employee number, last name, first name, and department name.
-
+SELECT Employees.emp_no, 
+	   Employees.last_name, 
+	   Employees.first_name,
+	   Departments.dept_name
+FROM Employees
+INNER JOIN dept_managers ON
+Employees.emp_no = dept_managers.emp_no
+INNER JOIN Departments ON
+dept_managers.dept_no = Departments.dept_no;
 --5. List first name, last name, and sex for employees whose first name is 
 --"Hercules" and last names begin with "B."
 SELECT first_name, last_name, gender
@@ -96,7 +113,13 @@ WHERE first_name = 'Hercules'
 and last_name like 'B%';
 --6. List all employees in the Sales department, including their 
 --employee number, last name, first name, and department name.
-
+SELECT e.emp_no, e.last_name, e.first_name, d.dept_name
+FROM Employees AS e
+JOIN dept_emp ON
+e.emp_no = dept_emp.emp_no
+INNER JOIN Departments AS d ON
+dept_emp.dept_no = d.dept_no
+WHERE dept_name = 'Sales';
 --7. List all employees in the Sales and Development departments, including their 
 --employee number, last name, first name, and department name.
 SELECT e.emp_no, e.last_name, e.first_name, d.dept_name
